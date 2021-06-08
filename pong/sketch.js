@@ -22,7 +22,7 @@ function setup() {
 }
 
 function draw() {
-  background(125);
+  background(255);
   if(gameOver == true){
     textAlign(CENTER);
     textSize(14);
@@ -33,10 +33,8 @@ function draw() {
     }
   }else{
     fill(255);
-    // rect(mouseX, height*0.9, 60, 10);
-    image(makarenko, mouseX, height*0.9, 80, 30);
-    image(atemnea, posX, posY, 35, 35);
-    // ellipse(posX, posY, 10, 10);
+    image(makarenko, mouseX, height*0.9, width*0.1, height*0.05);
+    image(atemnea, posX, posY, width*0.07, width*0.07);
     if(posY < 0){
       speedY = - speedY;
       posY = 0;
@@ -56,7 +54,7 @@ function draw() {
       speedX = speedX;
       speedY = speedY;
     }
-    if(posX > mouseX - 40 && posX < mouseX + 40 && posY > 0.9 * height - 5 && posY < 0.9 * height + 5){
+    if(posX > mouseX - width*0.1 && posX < mouseX + width*0.1 && posY > 0.9 * height - 5 && posY < 0.9 * height + 5){
       speedX = speedX;
       speedY = -1 * speedY;
       score += 1;
@@ -72,8 +70,8 @@ function keyPressed(){
   if(gameOver == true){
     gameOver = false;
     firstGame = false;
-    speedX = random(5);
-    speedY = random(5);
+    speedX = random(5, 10);
+    speedY = random(5, 10);
     score = 0;
   }
 }
