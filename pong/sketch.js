@@ -7,7 +7,7 @@ let gameOver = true;
 let score = 0;
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth, windowHeight * 0.95);
   posX = width / 2;
   posy = height / 2;
   score = 0;
@@ -67,4 +67,8 @@ function keyPressed(){
     speedY = random(5);
     score = 0;
   }
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight * 0.95);
 }
