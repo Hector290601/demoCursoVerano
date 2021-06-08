@@ -32,7 +32,6 @@ function draw() {
       text("GAME OVER", width / 2, height / 2 + 20);
     }
   }else{
-    fill(255);
     image(makarenko, mouseX, height*0.9, width*0.1, height*0.05);
     image(atemnea, posX, posY, width*0.07, width*0.07);
     if(posY < 0){
