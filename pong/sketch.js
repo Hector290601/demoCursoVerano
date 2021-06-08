@@ -5,13 +5,20 @@ let speedY = 0;
 let firstGame = true;
 let gameOver = true;
 let score = 0;
+let atemnea;
+let makarenko;
+
+function preload(){
+  atemnea = loadImage("../img/isotipo_rgb_png_atemnea_fondoblanco.png")
+  makarenko = loadImage("../img/makarenko.jpeg");
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight * 0.958);
   posX = width / 2;
   posy = height / 2;
   score = 0;
-  rectMode(CENTER);
+  imageMode(CENTER);
 }
 
 function draw() {
@@ -26,8 +33,10 @@ function draw() {
     }
   }else{
     fill(255);
-    rect(mouseX, height*0.9, 60, 10);
-    ellipse(posX, posY, 10, 10);
+    // rect(mouseX, height*0.9, 60, 10);
+    image(makarenko, mouseX, height*0.9, 80, 30);
+    image(atemnea, posX, posY, 35, 35);
+    // ellipse(posX, posY, 10, 10);
     if(posY < 0){
       speedY = - speedY;
       posY = 0;
@@ -47,7 +56,7 @@ function draw() {
       speedX = speedX;
       speedY = speedY;
     }
-    if(posX > mouseX - 30 && posX < mouseX + 30 && posY > 0.9 * height - 5 && posY < 0.9 * height + 5){
+    if(posX > mouseX - 40 && posX < mouseX + 40 && posY > 0.9 * height - 5 && posY < 0.9 * height + 5){
       speedX = speedX;
       speedY = -1 * speedY;
       score += 1;
