@@ -33,11 +33,11 @@ function draw() {
     if(firstGame == false) {
       textSize(20);
       if(score1 >= 10) {
-        text("GAME OVER", width / 2, height / 2 + 20);
-        text("1 PLAYER WINNER", width / 2, height / 2 + 40);
+        text("FIN DEL JUEGO", width / 2, height / 2 + 20);
+        text("GANÓ EL JUGADOR 1", width / 2, height / 2 + 40);
       }else if(score2 >= 10) {
-        text("GAME OVER", width / 2, height / 2 + 20);
-        text("2 PLAYER WINNER", width / 2, height / 2 + 40);
+        text("FIN DEL JUEGO", width / 2, height / 2 + 20);
+        text("GANÓ EL JUGADOR 2", width / 2, height / 2 + 40);
       }
     }
   }else{
