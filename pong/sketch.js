@@ -1,16 +1,19 @@
 let posX = 0;
 let posY = 0;
+let baseX = 0;
+let topX = 0
 let speedX = 0;
 let speedY = 0;
 let firstGame = true;
 let gameOver = true;
-let score = 0;
+let score1 = 0;
+let score2 = 0;
 let atemnea;
-let makarenko;
+let base;
 
 function preload(){
   atemnea = loadImage("../img/isotipo_rgb_png_atemnea_fondoblanco.png")
-  makarenko = loadImage("../img/makarenko.jpeg");
+  base = loadImage("../img/atemnea.png");
 }
 
 function setup() {
@@ -29,15 +32,18 @@ function draw() {
     text("PRESIONA CUALQUIER TECLA", width/2, height/2 - 20);
     if(firstGame == false) {
       textSize(20);
-      text("GAME OVER", width / 2, height / 2 + 20);
+      if(score1 >= 10) {
+        text("GAME OVER", width / 2, height / 2 + 20);
+        text("1 PLAYER WINNER", width / 2, height / 2 + 40);
+      }else if(score2 >= 10) {
+        text("GAME OVER", width / 2, height / 2 + 20);
+        text("2 PLAYER WINNER", width / 2, height / 2 + 40);
+      }
     }
   }else{
-    image(makarenko, mouseX, height*0.9, width*0.1, height*0.05);
+    image(base, baseX, height*0.9, width*0.1, height*0.05);
+    image(base, topX, height*0.1, width*0.1, height*0.05);
     image(atemnea, posX, posY, width*0.07, width*0.07);
-    if(posY < 0){
-      speedY = - speedY;
-      posY = 0;
-    }
     if(posX > width){
       speedX = - speedX;
       posX = width;
@@ -49,16 +55,30 @@ function draw() {
     if(posY > height){
       posX = width/2;
       posY = height/2;
-      gameOver = true;
-      speedX = speedX;
-      speedY = speedY;
+      speedX = random(5, 10);
+      speedY = random(5, 10);
+      score2 += 1;
+    }else if(posY < height * 0.1){
+      posX = width/2;
+      posY = height/2;
+      speedX = -random(5, 10);
+      speedY = -random(5, 10);
+      score1 += 1;
     }
-    if(posX > mouseX - width*0.1 && posX < mouseX + width*0.1 && posY > 0.9 * height - 5 && posY < 0.9 * height + 5){
+    if(posX > baseX - width*0.1 && posX < baseX + width*0.1 && posY > 0.9 * height - 5 && posY < 0.9 * height + 5){
       speedX = speedX;
       speedY = -1 * speedY;
-      score += 1;
+    }else if(posX > topX - width*0.1 && posX < topX + width*0.1 && posY > 0.1 * height - 5 && posY < 0.1 * height + 5){
+      speedX = speedX;
+      speedY = -1 * speedY;
     }else{
-      text(score, 320, 30);
+      text(score1, 320, 30);
+      text(score2, width - 320, 30);
+    }
+    if(score1 >= 10){
+      gameOver = true;
+    }else if(score2 >= 10){
+      gameOver = true;
     }
     posX+=speedX;
     posY+=speedY;
@@ -66,12 +86,23 @@ function draw() {
 }
 
 function keyPressed(){
-  if(gameOver == true){
-    gameOver = false;
-    firstGame = false;
-    speedX = random(5, 10);
-    speedY = random(5, 10);
-    score = 0;
+  if(keyCode == LEFT_ARROW && (baseX - windowWidth*0.05) > 0 && gameOver == false){
+    baseX -= windowWidth*0.1;
+  }else if(keyCode == RIGHT_ARROW && (baseX - windowWidth*0.1) < (windowWidth - width*0.15) && gameOver == false){
+    baseX += windowWidth*0.1;
+  }else if(keyCode == UP_ARROW && (topX - windowWidth*0.05) > 0 && gameOver == false){
+    topX -= windowWidth*0.1;
+  }else if(keyCode == DOWN_ARROW && (topX - windowWidth*0.1) < (windowWidth - width*0.15) && gameOver == false){
+    topX += windowWidth*0.1;
+  }else{
+    if(gameOver == true){
+      gameOver = false;
+      firstGame = false;
+      speedX = random(5, 10);
+      speedY = random(5, 10);
+      score1 = 0;
+      score2 = 0;
+    }
   }
 }
 
