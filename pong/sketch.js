@@ -10,10 +10,11 @@ let score1 = 0;
 let score2 = 0;
 let atemnea;
 let base;
+let bg;
 
 function preload(){
   atemnea = loadImage("../img/isotipo_rgb_png_atemnea_fondoblanco.png")
-  base = loadImage("../img/atemnea.png");
+  base = loadImage("../img/base.png");
 }
 
 function setup() {
